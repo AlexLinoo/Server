@@ -25,7 +25,7 @@ const associationSchema = new Schema(
         children: {
             type: Number
         },
-        associationImage: {
+        image: {
             type: String
         }
     },

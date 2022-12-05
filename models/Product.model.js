@@ -1,5 +1,6 @@
 const { Schema, model, default: mongoose } = require("mongoose");
 
+
 const productSchema = new Schema(
     {
         owner: {

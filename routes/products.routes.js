@@ -2,7 +2,7 @@ const router = require("express").Router()
 
 const Product = require("./../models/Product.model")
 
-router.get("/products", (req, res, next) => {
+router.get("/", (req, res, next) => {
 
     Product
         .find()
@@ -26,5 +26,6 @@ router.get("/getOneProduct/:product_id", (req, res, next) => {
         .then(response => res.json(response))
         .catch(err => next(err))
 })
+
 
 module.exports = router
