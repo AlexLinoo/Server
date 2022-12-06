@@ -11,7 +11,7 @@ router.get("/", (req, res, next) => {
         .catch(err => res.status(500).json(err))
 })
 router.post("/uploadProduct", (req, res, next) => {
-
+    const { name, description, image, type, state, ticketImage } = req.body
     Product
         .create(req.body)
         .then(response => res.json(response))
