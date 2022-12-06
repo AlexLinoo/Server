@@ -19,11 +19,13 @@ const productSchema = new Schema(
             type: String
         },
         type: {
-            enum: ['clothes', 'toys', 'school', 'others'],
+            type: String,
+            enum: ['Ropa', 'Juguetes', 'Material Escolar', 'Otros'],
 
         },
         state: {
-            enum: ['new', 'second-hand'],
+            type: String,
+            enum: ['Nuevo', 'Semi-Nuevo'],
 
         },
         ticketImage: {
