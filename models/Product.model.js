@@ -9,6 +9,7 @@ const productSchema = new Schema(
         },
         name: {
             type: String,
+            required: [true, 'El nombre es obligatorio']
 
         },
         image: {
@@ -16,16 +17,19 @@ const productSchema = new Schema(
 
         },
         description: {
-            type: String
+            type: String,
+            required: [true, 'La descripcion es obligatoria']
         },
         type: {
             type: String,
             enum: ['Ropa', 'Juguetes', 'Material Escolar', 'Otros'],
+            required: [true, 'Selecciona el tipo de producto']
 
         },
         state: {
             type: String,
             enum: ['Nuevo', 'Semi-Nuevo'],
+            required: [true, 'Selecciona el estado del producto']
 
         },
         ticketImage: {

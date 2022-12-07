@@ -8,14 +8,14 @@ router.get("/", (req, res, next) => {
         .find()
         .select({ name: 1, image: 1, description: 1, state: 1, type: 1 })
         .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+        .catch(err => next(err))
 })
 router.post("/uploadProduct", (req, res, next) => {
     const { name, description, image, type, state, ticketImage } = req.body
     Product
         .create(req.body)
         .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
+        .catch(err => next(err))
 
 })
 router.get("/getOneProduct/:product_id", (req, res, next) => {
