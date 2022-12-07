@@ -1,32 +1,13 @@
 const router = require("express").Router()
 
-const Product = require("./../models/Product.model")
+const { getAllProducts, uploadProduct, getOneProduct } = require("../controllers/products.controller")
 
-router.get("/", (req, res, next) => {
 
-    Product
-        .find()
-        .select({ name: 1, image: 1, description: 1, state: 1, type: 1 })
-        .then(response => res.json(response))
-        .catch(err => next(err))
-})
-router.post("/uploadProduct", (req, res, next) => {
-    const { name, description, image, type, state, ticketImage } = req.body
-    Product
-        .create(req.body)
-        .then(response => res.json(response))
-        .catch(err => next(err))
+router.get("/", getAllProducts)
 
-})
-router.get("/getOneProduct/:product_id", (req, res, next) => {
+router.post("/uploadProduct", uploadProduct)
 
-    const { product_id } = req.params
-
-    Product
-        .findById(product_id)
-        .then(response => res.json(response))
-        .catch(err => next(err))
-})
+router.get("/getOneProduct/:product_id", getOneProduct)
 
 
 module.exports = router
