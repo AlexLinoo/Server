@@ -13,7 +13,7 @@ router.post('/signup', (req, res, next) => {
     const { email, password, username, profileImage } = req.body
 
     if (password.length < 2) {
-        res.status(400).json({ message: 'Password must have at least 3 characters' })
+        res.status(400).json({ message: 'La contraseña debe tener al menos 3 caracteres' })
         return
     }
 
@@ -22,7 +22,7 @@ router.post('/signup', (req, res, next) => {
         .then((foundUser) => {
 
             if (foundUser) {
-                res.status(400).json({ message: "User already exists." })
+                res.status(400).json({ message: "El usuario ya existe" })
                 return
             }
 
@@ -39,7 +39,7 @@ router.post('/signup', (req, res, next) => {
         })
         .catch(err => {
             console.log(err)
-            res.status(500).json({ message: "Internal Server Error" })
+            res.status(500).json({ message: "Rellene todos los campos" })
         })
 })
 
@@ -49,7 +49,7 @@ router.post('/login', (req, res, next) => {
     const { email, password } = req.body;
 
     if (email === '' || password === '') {
-        res.status(400).json({ message: "Provide email and password." });
+        res.status(400).json({ message: "Introduce el email y la contraseña." });
         return;
     }
 
@@ -58,7 +58,7 @@ router.post('/login', (req, res, next) => {
         .then((foundUser) => {
 
             if (!foundUser) {
-                res.status(401).json({ message: "User not found." })
+                res.status(401).json({ message: "Usuario no encontrado." })
                 return;
             }
 
@@ -77,7 +77,7 @@ router.post('/login', (req, res, next) => {
                 res.status(200).json({ authToken });
             }
             else {
-                res.status(401).json({ message: "Unable to authenticate the user" });
+                res.status(401).json({ message: "error de autenticación" });
             }
 
         })

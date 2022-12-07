@@ -4,7 +4,7 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: [true, 'Username is required']
+      required: true
     },
     profileImage: {
       type: String
@@ -16,14 +16,14 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      required: [true, 'Email is required.'],
+      required: true,
       unique: true,
       lowercase: true,
       trim: true
     },
     password: {
       type: String,
-      required: [true, 'Password is required.']
+      required: true
     }
   },
   {
