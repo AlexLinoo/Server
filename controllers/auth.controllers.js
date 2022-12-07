@@ -8,7 +8,7 @@ const SignUp = (req, res, next) => {
     const { email, password, username, profileImage } = req.body
 
     if (password.length < 2) {
-        res.status(400).json({ message: 'Password must have at least 3 characters' })
+        res.status(400).json({ message: 'La contraseña debe tener un mínimo de 3 caracteres' })
         return
     }
 
@@ -17,7 +17,7 @@ const SignUp = (req, res, next) => {
         .then((foundUser) => {
 
             if (foundUser) {
-                res.status(400).json({ message: "User already exists." })
+                res.status(400).json({ message: "El usuario ya existe." })
                 return
             }
 
@@ -34,7 +34,7 @@ const SignUp = (req, res, next) => {
         })
         .catch(err => {
             console.log(err)
-            res.status(500).json({ message: "Internal Server Error" })
+            res.status(500).json({ message: "Rellena todos los campos" })
         })
 }
 
@@ -42,7 +42,7 @@ const Login = (req, res, next) => {
     const { email, password } = req.body;
 
     if (email === '' || password === '') {
-        res.status(400).json({ message: "Provide email and password." });
+        res.status(400).json({ message: "Introduce el email y la contraseña" });
         return;
     }
 
@@ -51,7 +51,7 @@ const Login = (req, res, next) => {
         .then((foundUser) => {
 
             if (!foundUser) {
-                res.status(401).json({ message: "User not found." })
+                res.status(401).json({ message: "Usuario no encontrado." })
                 return;
             }
 
@@ -70,7 +70,7 @@ const Login = (req, res, next) => {
                 res.status(200).json({ authToken });
             }
             else {
-                res.status(401).json({ message: "Unable to authenticate the user" });
+                res.status(401).json({ message: "Error de autenticación" });
             }
 
         })
