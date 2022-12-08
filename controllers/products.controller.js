@@ -6,7 +6,7 @@ const getAllProducts = (req, res, next) => {
 
     Product
         .find()
-        .select({ name: 1, image: 1, description: 1, state: 1, type: 1, owner: 1 })
+        .populate('owner')
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -29,8 +29,40 @@ const getOneProduct = (req, res, next) => {
         .catch(err => next(err))
 }
 
+const deleteProduct = (req, res, next) => {
+    const { product_id } = req.params
+
+    Product
+        .findByIdAndDelete(product_id)
+        .then(response => res.json(response))
+        .catch(err => next(err))
+
+}
+
+const editProduct = (req, res, next) => {
+    const { product_id } = req.params
+    const { name, description, type, state } = req.body
+
+    Product
+        .findByIdAndUpdate(product_id, { name, description, type, state })
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
+const getUserProducts = (req, res, next) => {
+    const { user_id } = req.params
+
+    Product
+        .find(user_id, { owner: req.payload_id })
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
 module.exports = {
     getAllProducts,
     uploadProduct,
-    getOneProduct
+    getOneProduct,
+    deleteProduct,
+    editProduct,
+    getUserProducts
 }
