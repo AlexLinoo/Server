@@ -1,5 +1,4 @@
 const router = require("express").Router()
-
 const upLoad = require("../controllers/upload.controller")
 const uploader = require('./../config/cloudinary.config')
 

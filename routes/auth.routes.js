@@ -1,8 +1,7 @@
 const router = require("express").Router()
-
 const { isAuthenticated } = require('./../middleware/jwt.middleware')
-
 const { SignUp, Login, Verify } = require("../controllers/auth.controllers")
+
 
 router.post('/signup', SignUp)
 

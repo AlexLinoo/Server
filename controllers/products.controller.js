@@ -1,7 +1,6 @@
 const Product = require("./../models/Product.model")
 
 
-
 const getAllProducts = (req, res, next) => {
 
     Product

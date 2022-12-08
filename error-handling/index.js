@@ -7,7 +7,6 @@ module.exports = (app) => {
 
   app.use((err, req, res, next) => {
 
-
     if (err.code && err.code === 1100) {
       res.status(409).json({ errorMessages: ['El registro ya se encuentra presente'] })
     }
@@ -17,9 +16,7 @@ module.exports = (app) => {
       res.status(400).json({ errorMessages })
     }
 
-
     console.error("ERROR", req.method, req.path, err);
-
 
     if (!res.headersSent) {
       res.status(500).json({ message: 'Internal server error. Check the server console' })

@@ -1,6 +1,5 @@
 const router = require("express").Router()
 const { isAuthenticated } = require('./../middleware/jwt.middleware')
-
 const { getAllProducts, uploadProduct, getOneProduct, deleteProduct, editProduct } = require("../controllers/products.controller")
 
 
