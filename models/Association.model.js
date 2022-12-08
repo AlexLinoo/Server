@@ -8,14 +8,17 @@ const associationSchema = new Schema(
         },
         name: {
             type: String,
+            required: [true, 'el nombre es obligatorio']
 
         },
         address: {
             type: String,
+            required: [true, 'la dirección es obligatorio']
 
         },
         description: {
             type: String,
+            required: [true, 'la descripción es obligatoria']
 
         },
         needs: {

@@ -1,41 +1,22 @@
 const User = require("../models/User.model")
 const bcrypt = require('bcryptjs')
-const saltRounds = 10
+
 const jwt = require("jsonwebtoken")
 
 const SignUp = (req, res, next) => {
 
     const { email, password, username, profileImage } = req.body
 
-    if (password.length < 2) {
-        res.status(400).json({ message: 'La contraseña debe tener un mínimo de 3 caracteres' })
-        return
-    }
-
     User
-        .findOne({ email })
-        .then((foundUser) => {
-
-            if (foundUser) {
-                res.status(400).json({ message: "El usuario ya existe." })
-                return
-            }
-
-            const salt = bcrypt.genSaltSync(saltRounds)
-            const hashedPassword = bcrypt.hashSync(password, salt)
-
-            return User.create({ email, password: hashedPassword, username, profileImage })
-        })
+        .create({ email, password, username, profileImage })
         .then((createdUser) => {
             const { email, username, _id } = createdUser
             const user = { email, username, _id }
 
             res.status(201).json({ user })
         })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({ message: "Rellena todos los campos" })
-        })
+        .catch(err => next(err))
+
 }
 
 const Login = (req, res, next) => {

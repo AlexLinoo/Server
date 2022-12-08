@@ -1,7 +1,7 @@
 const router = require("express").Router()
-const upLoad = require("../controllers/upload.controller")
+const { uploadSingleFile } = require("../controllers/upload.controller")
 const uploader = require('./../config/cloudinary.config')
 
-router.post('/image', uploader.single('imageData'), upLoad)
+router.post('/image', uploader.single('imageData'), uploadSingleFile)
 
 module.exports = router

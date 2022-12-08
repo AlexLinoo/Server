@@ -9,15 +9,18 @@ const getAllAssociations = (req, res, next) => {
 }
 
 const uploadAssociation = (req, res, next) => {
-    const { name, description, image, address, needs, children, owner } = req.body
+
+    const { name, description, image, address, needs, children } = req.body
+    const { _id: owner } = req.payload
 
     Association
-        .create({ ...req.body, owner: req.payload._id })
+        .create({ name, description, image, address, needs, children, owner })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
 
 const getOneAssociation = (req, res, next) => {
+
     const { association_id } = req.params
 
     Association

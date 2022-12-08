@@ -5,16 +5,19 @@ const getAllProducts = (req, res, next) => {
 
     Product
         .find()
+        .select({ owner: 1, name: 1, description: 1, type: 1, state: 1, image: 1 })
         .populate('owner')
         .then(response => res.json(response))
         .catch(err => next(err))
 }
 
 const uploadProduct = (req, res, next) => {
-    const { name, description, image, type, state, owner } = req.body
+
+    const { name, description, image, type, state } = req.body
+    const { _id: owner } = req.payload
 
     Product
-        .create({ ...req.body, owner: req.payload._id })
+        .create({ name, description, image, type, state, owner })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -49,10 +52,11 @@ const editProduct = (req, res, next) => {
 }
 
 const getUserProducts = (req, res, next) => {
-    const { user_id } = req.params
+
+    const { _id: owner } = req.payload
 
     Product
-        .find(user_id, { owner: req.payload_id })
+        .find({ owner })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
