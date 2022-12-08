@@ -11,4 +11,7 @@ module.exports = app => {
 
     const UserRoutes = require("./user.routes");
     app.use("/api/users", UserRoutes)
+
+    const AssociationRoutes = require("./associations.routes");
+    app.use("/api/associations", AssociationRoutes)
 }

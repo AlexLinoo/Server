@@ -19,7 +19,8 @@ const associationSchema = new Schema(
 
         },
         needs: {
-            enum: ['clothes', 'toys', 'school', 'others'],
+            type: String,
+            enum: ['Ropa', 'Juguetes', 'Material Escolar', 'Otros'],
 
         },
         children: {
