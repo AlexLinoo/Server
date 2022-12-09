@@ -27,20 +27,12 @@ const deleteUser = (req, res, next) => {
         .catch(err => next(err))
 
 }
-const editUser = (req, res, next) => {
-    const { user_id } = req.params
-    const { name, description, type, state } = req.body
 
-    Product
-        .findByIdAndUpdate(user_id, { name, description, type, state })
-        .then(response => res.json(response))
-        .catch(err => next(err))
-}
 
 module.exports =
 {
     getAllUsers,
     getOneUser,
     deleteUser,
-    editUser
+
 }

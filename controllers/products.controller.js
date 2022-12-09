@@ -1,4 +1,6 @@
+const User = require("../models/User.model")
 const Product = require("./../models/Product.model")
+const { getOneUser } = require("./user.controller")
 
 
 const getAllProducts = (req, res, next) => {
@@ -70,6 +72,32 @@ const getProductType = (req, res, next) => {
         .catch(err => next(err))
 }
 
+const getProductFav = (req, res, next) => {
+
+    const { product_id } = req.params
+
+    User
+        .findByIdAndUpdate(req.payload._id, { $addToSet: { favProduct: product_id } })
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
+const quitProductFav = (req, res, next) => {
+
+    const { product_id } = req.params
+
+    User
+        .findByIdAndUpdate(req.payload._id, { $pull: { favProduct: product_id } })
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
+const getFavProduct = (req, res, next) => {
+
+    User
+
+}
+
 module.exports = {
     getAllProducts,
     uploadProduct,
@@ -77,5 +105,8 @@ module.exports = {
     deleteProduct,
     editProduct,
     getUserProducts,
-    getProductType
+    getProductType,
+    getProductFav,
+    quitProductFav,
+    getFavProduct
 }

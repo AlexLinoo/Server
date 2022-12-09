@@ -25,7 +25,12 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, 'la contraseña debe tener min. 3 caracteres']
+    },
+    favorites: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Product'
     }
+    ]
   },
   {
     timestamps: true

@@ -4,6 +4,7 @@ const getAllAssociations = (req, res, next) => {
 
     Association
         .find()
+        .populate('owner')
         .then(response => res.json(response))
         .catch(err => next(err))
 }
