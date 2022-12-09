@@ -57,6 +57,15 @@ const getUserProducts = (req, res, next) => {
 
     Product
         .find({ owner })
+        .populate('owner')
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
+const getProductType = (req, res, next) => {
+
+    Product
+        .find(type)
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -67,5 +76,6 @@ module.exports = {
     getOneProduct,
     deleteProduct,
     editProduct,
-    getUserProducts
+    getUserProducts,
+    getProductType
 }
