@@ -19,7 +19,7 @@ router.get("/getProductType", getProductType)
 
 router.post("/favProduct/:product_id", isAuthenticated, getProductFav)
 
-router.post("noFavProduct/:product_id", isAuthenticated, quitProductFav)
+router.post("/noFavProduct/:product_id", isAuthenticated, quitProductFav)
 
 router.get("/getFavProduct", isAuthenticated, getFavProduct)
 

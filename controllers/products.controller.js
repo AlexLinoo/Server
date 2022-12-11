@@ -1,3 +1,4 @@
+const { findById } = require("../models/User.model")
 const User = require("../models/User.model")
 const Product = require("./../models/Product.model")
 const { getOneUser } = require("./user.controller")
@@ -77,7 +78,7 @@ const getProductFav = (req, res, next) => {
     const { product_id } = req.params
 
     User
-        .findByIdAndUpdate(req.payload._id, { $addToSet: { favProduct: product_id } })
+        .findByIdAndUpdate(req.payload._id, { $addToSet: { favorites: product_id } })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -87,7 +88,7 @@ const quitProductFav = (req, res, next) => {
     const { product_id } = req.params
 
     User
-        .findByIdAndUpdate(req.payload._id, { $pull: { favProduct: product_id } })
+        .findByIdAndUpdate(req.payload._id, { $pull: { favorites: product_id } })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -95,6 +96,12 @@ const quitProductFav = (req, res, next) => {
 const getFavProduct = (req, res, next) => {
 
     User
+        .findById(req.payload._id)
+        .populate('favorites')
+        .then(response => {
+            res.json(response.favorites)
+        })
+        .catch(err => next(err))
 
 }
 
