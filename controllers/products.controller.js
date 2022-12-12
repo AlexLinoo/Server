@@ -74,9 +74,11 @@ const getProductType = (req, res, next) => {
         .catch(err => next(err))
 }
 
-const donateProduct = (req, res, next) => {
+const applyForProduct = (req, res, next) => {
 
     const { product_id } = req.params
+
+    console.log('TENEIS QUE METER ESTE ID', product_id, 'EN ELK ARRAY DE DONACIONES DE LA ASOC')
 
     Association
         .findByIdAndUpdate(req.payload._id, { $addToSet: { favorites: product_id } })
@@ -84,14 +86,15 @@ const donateProduct = (req, res, next) => {
         .catch(err => next(err))
 }
 
-const getDonatedProduct = (req, res, next) => {
+const getDonations = (req, res, next) => {
 
     Association
 
         .findById(req.payload._id)
+        .select('donated')
         .populate('donated')
         .then(response => {
-            res.json(response.donated)
+            res.json(response)
         })
         .catch(err => next(err))
 
@@ -141,6 +144,6 @@ module.exports = {
     getProductFav,
     quitProductFav,
     getFavProduct,
-    getDonatedProduct,
-    donateProduct,
+    getDonations,
+    applyForProduct,
 }
