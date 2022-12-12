@@ -1,5 +1,6 @@
 const { findById } = require("../models/User.model")
 const User = require("../models/User.model")
+const Association = require("../models/Association.model")
 const Product = require("./../models/Product.model")
 const { getOneUser } = require("./user.controller")
 
@@ -73,6 +74,29 @@ const getProductType = (req, res, next) => {
         .catch(err => next(err))
 }
 
+const donateProduct = (req, res, next) => {
+
+    const { product_id } = req.params
+
+    Association
+        .findByIdAndUpdate(req.payload._id, { $addToSet: { favorites: product_id } })
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
+const getDonatedProduct = (req, res, next) => {
+
+    Association
+
+        .findById(req.payload._id)
+        .populate('donated')
+        .then(response => {
+            res.json(response.donated)
+        })
+        .catch(err => next(err))
+
+}
+
 const getProductFav = (req, res, next) => {
 
     const { product_id } = req.params
@@ -115,5 +139,7 @@ module.exports = {
     getProductType,
     getProductFav,
     quitProductFav,
-    getFavProduct
+    getFavProduct,
+    getDonatedProduct,
+    donateProduct,
 }

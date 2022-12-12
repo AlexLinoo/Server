@@ -31,7 +31,12 @@ const associationSchema = new Schema(
         },
         image: {
             type: String
-        }
+        },
+
+        donated: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Product'
+        }]
     },
     {
         timestamps: true
