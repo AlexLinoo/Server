@@ -23,7 +23,7 @@ router.post("/noFavProduct/:product_id", isAuthenticated, quitProductFav)
 
 router.get("/getFavProduct", isAuthenticated, getFavProduct)
 
-router.put("/applyForProduct", isAuthenticated, applyForProduct)
+router.put("/applyForProduct/:product_id", isAuthenticated, applyForProduct)
 
 router.get("/getDonations", isAuthenticated, getDonations)
 

@@ -2,7 +2,7 @@ const { findById } = require("../models/User.model")
 const User = require("../models/User.model")
 const Association = require("../models/Association.model")
 const Product = require("./../models/Product.model")
-const { getOneUser } = require("./user.controller")
+
 
 
 const getAllProducts = (req, res, next) => {
@@ -76,13 +76,18 @@ const getProductType = (req, res, next) => {
 
 const applyForProduct = (req, res, next) => {
 
-    const product_id = req.body
+    const product_id = req.params
 
     console.log('TENEIS QUE METER ESTE ID', product_id, 'EN ELK ARRAY DE DONACIONES DE LA ASOC')
 
     Association
-        .findByIdAndUpdate(req.payload._id, { $addToSet: { product_id } }, { new: true })
-        .then(response => res.json(response))
+
+        .findByIdAndUpdate(req.payload._id, { $addToSet: { donated: product_id } })
+        .then(response => {
+            console.log(response)
+            res.json(response)
+        })
+
         .catch(err => next(err))
 }
 
