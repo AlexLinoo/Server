@@ -97,9 +97,10 @@ const getFavProduct = (req, res, next) => {
 
     User
         .findById(req.payload._id)
+        .select('favorites')
         .populate('favorites')
         .then(response => {
-            res.json(response.favorites)
+            res.json(response)
         })
         .catch(err => next(err))
 
