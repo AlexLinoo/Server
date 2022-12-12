@@ -76,12 +76,12 @@ const getProductType = (req, res, next) => {
 
 const applyForProduct = (req, res, next) => {
 
-    const { product_id } = req.params
+    const product_id = req.body
 
     console.log('TENEIS QUE METER ESTE ID', product_id, 'EN ELK ARRAY DE DONACIONES DE LA ASOC')
 
     Association
-        .findByIdAndUpdate(req.payload._id, { $addToSet: { favorites: product_id } })
+        .findByIdAndUpdate(req.payload._id, { $addToSet: { product_id } }, { new: true })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
