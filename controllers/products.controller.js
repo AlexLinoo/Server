@@ -94,7 +94,7 @@ const applyForProduct = (req, res, next) => {
 
 const getDonations = (req, res, next) => {
 
-    const association_id = req.params
+    const { association_id } = req.params
 
     Association
         .findById(association_id)
