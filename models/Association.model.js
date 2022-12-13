@@ -22,10 +22,20 @@ const associationSchema = new Schema(
 
         },
         needs: {
-            type: String,
-            enum: ['Ropa', 'Juguetes', 'Material Escolar', 'Otros'],
-
+            ropa: {
+                type: Boolean
+            },
+            juguetes: {
+                type: Boolean
+            },
+            material_escolar: {
+                type: Boolean
+            },
+            otros: {
+                type: Boolean
+            }
         },
+
         children: {
             type: Number
         },

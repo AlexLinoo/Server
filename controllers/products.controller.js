@@ -78,10 +78,11 @@ const applyForProduct = (req, res, next) => {
 
     const product_id = req.params
 
+
     console.log('TENEIS QUE METER ESTE ID', product_id, 'EN ELK ARRAY DE DONACIONES DE LA ASOC')
+    // necesitais el id de la asociacion
 
     Association
-
         .findByIdAndUpdate(req.payload._id, { $addToSet: { donated: product_id } })
         .then(response => {
             console.log(response)
