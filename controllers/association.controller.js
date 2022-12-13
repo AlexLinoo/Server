@@ -29,6 +29,7 @@ const getOneAssociation = (req, res, next) => {
 
     Association
         .findById(association_id)
+        .populate('owner')
         .then(response => res.json(response))
         .catch(err => next(err))
 }
