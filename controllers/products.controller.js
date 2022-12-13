@@ -31,6 +31,7 @@ const getOneProduct = (req, res, next) => {
 
     Product
         .findById(product_id)
+        .populate('owner')
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -76,15 +77,15 @@ const getProductType = (req, res, next) => {
 
 const applyForProduct = (req, res, next) => {
 
-    const product_id = req.params
+    const { donated: product_id } = req.body
+    const { association_id } = req.params
 
     console.log('TENEIS QUE METER ESTE ID', product_id, 'EN ELK ARRAY DE DONACIONES DE LA ASOC')
-    // necesitais el id de la asociacion
+
 
     Association
-        .findByIdAndUpdate(req.payload._id, { $addToSet: { donated: product_id } })
+        .findByIdAndUpdate(association_id, { $addToSet: { donated: product_id } })
         .then(response => {
-            console.log(response)
             res.json(response)
         })
 
@@ -93,9 +94,10 @@ const applyForProduct = (req, res, next) => {
 
 const getDonations = (req, res, next) => {
 
-    Association
+    const association_id = req.params
 
-        .findById(req.payload._id)
+    Association
+        .findById(association_id)
         .select('donated')
         .populate('donated')
         .then(response => {
