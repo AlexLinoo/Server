@@ -2,6 +2,7 @@ const { findById } = require("../models/User.model")
 const User = require("../models/User.model")
 const Association = require("../models/Association.model")
 const Product = require("./../models/Product.model")
+const { findByIdAndUpdate } = require("../models/Association.model")
 
 
 
@@ -67,6 +68,16 @@ const getUserProducts = (req, res, next) => {
         .catch(err => next(err))
 }
 
+const getOneUserProducts = (req, res, next) => {
+
+    const { user_id } = req.params
+
+    Product
+        .find({ owner: user_id })
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
 const getProductType = (req, res, next) => {
 
     Product
@@ -77,15 +88,16 @@ const getProductType = (req, res, next) => {
 
 const applyForProduct = (req, res, next) => {
 
-    const { donated: product_id, status } = req.body
+    const { donated: product_id } = req.body
     const { association_id } = req.params
 
     Association
         .findByIdAndUpdate(association_id, { $addToSet: { donated: product_id } })
         .then(response => {
-            res.json(response)
+            return Product.findByIdAndUpdate(product_id, { status: 'donated' })
 
         })
+        .then(() => res.sendStatus(204))
 
         .catch(err => next(err))
 }
@@ -151,4 +163,5 @@ module.exports = {
     getFavProduct,
     getDonations,
     applyForProduct,
+    getOneUserProducts
 }
