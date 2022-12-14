@@ -21,7 +21,7 @@ const uploadProduct = (req, res, next) => {
     const { _id: owner } = req.payload
 
     Product
-        .create({ name, description, image, type, state, status, owner })
+        .create({ name, description, image, type, state, owner, status })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -81,7 +81,7 @@ const applyForProduct = (req, res, next) => {
     const { association_id } = req.params
 
     Association
-        .findByIdAndUpdate(association_id, status, { $addToSet: { donated: product_id } })
+        .findByIdAndUpdate(association_id, { $addToSet: { donated: product_id } })
         .then(response => {
             res.json(response)
 
