@@ -9,7 +9,7 @@ const getAllProducts = (req, res, next) => {
 
     Product
         .find()
-        .select({ owner: 1, name: 1, description: 1, type: 1, state: 1, image: 1 })
+        .select({ owner: 1, name: 1, description: 1, type: 1, state: 1, image: 1, status: 1 })
         .populate('owner')
         .then(response => res.json(response))
         .catch(err => next(err))
@@ -17,11 +17,11 @@ const getAllProducts = (req, res, next) => {
 
 const uploadProduct = (req, res, next) => {
 
-    const { name, description, image, type, state } = req.body
+    const { name, description, image, type, state, status } = req.body
     const { _id: owner } = req.payload
 
     Product
-        .create({ name, description, image, type, state, owner })
+        .create({ name, description, image, type, state, owner, status })
         .then(response => res.json(response))
         .catch(err => next(err))
 }

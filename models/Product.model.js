@@ -32,6 +32,13 @@ const productSchema = new Schema(
             required: [true, 'Selecciona el estado del producto']
 
         },
+
+        status: {
+            type: String,
+            enum: ['offered', 'donated'],
+            default: 'offered'
+        },
+
         ticketImage: {
             type: String
         }
