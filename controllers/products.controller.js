@@ -95,10 +95,8 @@ const applyForProduct = (req, res, next) => {
         .findByIdAndUpdate(association_id, { $addToSet: { donated: product_id } })
         .then(response => {
             return Product.findByIdAndUpdate(product_id, { status: 'donated' })
-
         })
         .then(() => res.sendStatus(204))
-
         .catch(err => next(err))
 }
 
